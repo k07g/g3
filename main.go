@@ -67,8 +67,10 @@ var weatherDescriptions = map[string]string{
 	"395": "激しい雷雪",
 }
 
+var wttrBaseURL = "https://wttr.in"
+
 func fetchWeather(location string) (string, error) {
-	resp, err := http.Get("https://wttr.in/" + location + "?format=j1")
+	resp, err := http.Get(wttrBaseURL + "/" + location + "?format=j1")
 	if err != nil {
 		return "", err
 	}

@@ -1,7 +1,7 @@
 BINARY := ohayo
 BIN_DIR := bin
 
-.PHONY: build run install clean help
+.PHONY: build run install test clean help
 
 help:
 	@echo "Usage: make <target>"
@@ -9,12 +9,16 @@ help:
 	@echo "Targets:"
 	@echo "  build   Build the binary to $(BIN_DIR)/$(BINARY)"
 	@echo "  run     Run without building"
+	@echo "  test    Run tests"
 	@echo "  install Install the binary via go install"
 	@echo "  clean   Remove the binary"
 	@echo "  help    Show this help"
 
 build:
 	go build -o $(BIN_DIR)/$(BINARY) .
+
+test:
+	go test -v ./...
 
 install: build
 	cp $(BIN_DIR)/$(BINARY) $(shell go env GOPATH)/bin/$(BINARY)
